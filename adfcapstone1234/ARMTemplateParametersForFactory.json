@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adfcapstone1234"
 		},
+		"ls_adls_capstone_accountKey": {
+			"value": ""
+		},
 		"ls_keyvault_capstone_properties_typeProperties_baseUrl": {
 			"value": "https://capstonekeyvault1234.vault.azure.net/"
 		},
@@ -16,6 +19,9 @@
 		},
 		"ls_sql_capstone_properties_typeProperties_userName": {
 			"value": "sqladmin"
+		},
+		"ls_adls_capstone_properties_typeProperties_url": {
+			"value": "https://capstoneadls1234.dfs.core.windows.net/"
 		}
 	}
 }
