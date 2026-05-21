@@ -1,0 +1,53 @@
+{
+	"name": "ds_raw_product",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_capstone",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "product_master_seed.csv",
+				"folderPath": "raw/product",
+				"fileSystem": "retail-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "product_id",
+				"type": "String"
+			},
+			{
+				"name": "product_name",
+				"type": "String"
+			},
+			{
+				"name": "category",
+				"type": "String"
+			},
+			{
+				"name": "brand",
+				"type": "String"
+			},
+			{
+				"name": "unit_price",
+				"type": "String"
+			},
+			{
+				"name": "status",
+				"type": "String"
+			},
+			{
+				"name": "last_updated",
+				"type": "String"
+			}
+		]
+	}
+}

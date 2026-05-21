@@ -1,0 +1,53 @@
+{
+	"name": "ds_loyalty_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_capstone",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "loyalty_membership_updates.csv",
+				"folderPath": "raw/loyaltyupdates",
+				"fileSystem": "retail-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "update_id",
+				"type": "String"
+			},
+			{
+				"name": "customer_id",
+				"type": "String"
+			},
+			{
+				"name": "old_loyalty_tier",
+				"type": "String"
+			},
+			{
+				"name": "new_loyalty_tier",
+				"type": "String"
+			},
+			{
+				"name": "change_reason",
+				"type": "String"
+			},
+			{
+				"name": "effective_date",
+				"type": "String"
+			},
+			{
+				"name": "updated_at",
+				"type": "String"
+			}
+		]
+	}
+}
