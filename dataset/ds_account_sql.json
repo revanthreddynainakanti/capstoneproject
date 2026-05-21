@@ -1,0 +1,46 @@
+{
+	"name": "ds_account_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_capstone",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "account_id",
+				"type": "varchar"
+			},
+			{
+				"name": "customer_id",
+				"type": "varchar"
+			},
+			{
+				"name": "account_type",
+				"type": "varchar"
+			},
+			{
+				"name": "open_date",
+				"type": "date"
+			},
+			{
+				"name": "account_status",
+				"type": "varchar"
+			},
+			{
+				"name": "available_balance",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "last_updated",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "account_master"
+		}
+	}
+}
