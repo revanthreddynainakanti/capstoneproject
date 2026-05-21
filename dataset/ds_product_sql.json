@@ -1,0 +1,47 @@
+{
+	"name": "ds_product_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_capstone",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "product_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "product_name",
+				"type": "varchar"
+			},
+			{
+				"name": "category",
+				"type": "varchar"
+			},
+			{
+				"name": "brand",
+				"type": "varchar"
+			},
+			{
+				"name": "unit_price",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "status",
+				"type": "varchar"
+			},
+			{
+				"name": "last_updated",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "product_master"
+		}
+	}
+}
