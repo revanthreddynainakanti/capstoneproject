@@ -43,115 +43,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "copy_customer_sql_to_raw",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "ds_customer_sql",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ds_raw_customer",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "copy_product_sql_to_raw",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "ds_product_sql",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ds_raw_product",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "copy_sales_csv_to_raw",
+						"name": "copy_bank_customer_sql_to_raw",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -197,21 +89,75 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_sales_csv",
+								"referenceName": "ds_bank_customer_csv",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_raw_sales",
+								"referenceName": "ds_raw_bank_customer",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "copy_loyalty_csv_to_raw",
+						"name": "copy_account_sql_to_raw",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_account_sql",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_raw_account",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy_transactions_csv_to_raw",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -257,14 +203,74 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_loyalty_csv",
+								"referenceName": "ds_transactions_csv",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_raw_loyalty",
+								"referenceName": "ds_raw_transactions",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy_blocked_merchants_to_raw",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_blocked_merchants_csv",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_raw_blocked_merchants",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -277,24 +283,24 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_customer_sql')]",
-				"[concat(variables('factoryId'), '/datasets/ds_raw_customer')]",
-				"[concat(variables('factoryId'), '/datasets/ds_product_sql')]",
-				"[concat(variables('factoryId'), '/datasets/ds_raw_product')]",
-				"[concat(variables('factoryId'), '/datasets/ds_sales_csv')]",
-				"[concat(variables('factoryId'), '/datasets/ds_raw_sales')]",
-				"[concat(variables('factoryId'), '/datasets/ds_loyalty_csv')]",
-				"[concat(variables('factoryId'), '/datasets/ds_raw_loyalty')]"
+				"[concat(variables('factoryId'), '/datasets/ds_bank_customer_csv')]",
+				"[concat(variables('factoryId'), '/datasets/ds_raw_bank_customer')]",
+				"[concat(variables('factoryId'), '/datasets/ds_account_sql')]",
+				"[concat(variables('factoryId'), '/datasets/ds_raw_account')]",
+				"[concat(variables('factoryId'), '/datasets/ds_transactions_csv')]",
+				"[concat(variables('factoryId'), '/datasets/ds_raw_transactions')]",
+				"[concat(variables('factoryId'), '/datasets/ds_blocked_merchants_csv')]",
+				"[concat(variables('factoryId'), '/datasets/ds_raw_blocked_merchants')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_load_sql_data')]",
+			"name": "[concat(parameters('factoryName'), '/pl_load_bank_sql_data')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "copy_customer_data",
+						"name": "copy_bank_customer_to_sql",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -334,8 +340,8 @@
 										},
 										"sink": {
 											"name": "customer_id",
-											"type": "Int32",
-											"physicalType": "int"
+											"type": "String",
+											"physicalType": "varchar"
 										}
 									},
 									{
@@ -400,26 +406,26 @@
 									},
 									{
 										"source": {
-											"name": "region",
+											"name": "kyc_status",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "region",
+											"name": "kyc_status",
 											"type": "String",
 											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "signup_date",
+											"name": "risk_category",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "signup_date",
-											"type": "Date",
-											"physicalType": "date"
+											"name": "risk_category",
+											"type": "String",
+											"physicalType": "varchar"
 										}
 									}
 								],
@@ -432,21 +438,21 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_customer_csv",
+								"referenceName": "ds_bank_customer_csv",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_customer_sql",
+								"referenceName": "ds_bank_customer_sql",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "copy_product_data",
+						"name": "copy_account_to_sql",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -480,78 +486,78 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "product_id",
+											"name": "account_id",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "product_id",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "product_name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "product_name",
+											"name": "account_id",
 											"type": "String",
 											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "category",
+											"name": "customer_id",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "category",
+											"name": "customer_id",
 											"type": "String",
 											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "brand",
+											"name": "account_type",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "brand",
+											"name": "account_type",
 											"type": "String",
 											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "unit_price",
+											"name": "open_date",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "unit_price",
+											"name": "open_date",
+											"type": "Date",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "account_status",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "account_status",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "available_balance",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "available_balance",
 											"type": "Double",
 											"physicalType": "float"
 										}
 									},
 									{
 										"source": {
-											"name": "status",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "status",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
 											"name": "last_updated",
 											"type": "String",
 											"physicalType": "String"
@@ -572,14 +578,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_product_csv",
+								"referenceName": "ds_account_csv",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_product_sql",
+								"referenceName": "ds_account_sql",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -592,14 +598,14 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_customer_csv')]",
-				"[concat(variables('factoryId'), '/datasets/ds_customer_sql')]",
-				"[concat(variables('factoryId'), '/datasets/ds_product_csv')]",
-				"[concat(variables('factoryId'), '/datasets/ds_product_sql')]"
+				"[concat(variables('factoryId'), '/datasets/ds_bank_customer_csv')]",
+				"[concat(variables('factoryId'), '/datasets/ds_bank_customer_sql')]",
+				"[concat(variables('factoryId'), '/datasets/ds_account_csv')]",
+				"[concat(variables('factoryId'), '/datasets/ds_account_sql')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_customer_csv')]",
+			"name": "[concat(parameters('factoryName'), '/ds_account_csv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -612,8 +618,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "customer_master_seed.csv",
-						"folderPath": "raw/customer",
+						"fileName": "account_master_seed.csv",
+						"folderPath": "raw/accountmaster",
 						"fileSystem": "retail-data"
 					},
 					"columnDelimiter": ",",
@@ -623,43 +629,27 @@
 				},
 				"schema": [
 					{
+						"name": "account_id",
+						"type": "String"
+					},
+					{
 						"name": "customer_id",
 						"type": "String"
 					},
 					{
-						"name": "customer_name",
+						"name": "account_type",
 						"type": "String"
 					},
 					{
-						"name": "email",
+						"name": "open_date",
 						"type": "String"
 					},
 					{
-						"name": "phone",
+						"name": "account_status",
 						"type": "String"
 					},
 					{
-						"name": "city",
-						"type": "String"
-					},
-					{
-						"name": "state",
-						"type": "String"
-					},
-					{
-						"name": "region",
-						"type": "String"
-					},
-					{
-						"name": "signup_date",
-						"type": "String"
-					},
-					{
-						"name": "loyalty_tier",
-						"type": "String"
-					},
-					{
-						"name": "status",
+						"name": "available_balance",
 						"type": "String"
 					},
 					{
@@ -673,7 +663,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_customer_sql')]",
+			"name": "[concat(parameters('factoryName'), '/ds_account_sql')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -685,210 +675,38 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
+						"name": "account_id",
+						"type": "varchar"
+					},
+					{
 						"name": "customer_id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "customer_name",
 						"type": "varchar"
 					},
 					{
-						"name": "email",
+						"name": "account_type",
 						"type": "varchar"
 					},
 					{
-						"name": "phone",
-						"type": "varchar"
-					},
-					{
-						"name": "city",
-						"type": "varchar"
-					},
-					{
-						"name": "state",
-						"type": "varchar"
-					},
-					{
-						"name": "region",
-						"type": "varchar"
-					},
-					{
-						"name": "signup_date",
+						"name": "open_date",
 						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "customer_master"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_sql_capstone')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_loyalty_csv')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_adls_capstone",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "loyalty_membership_updates.csv",
-						"folderPath": "raw/loyaltyupdates",
-						"fileSystem": "retail-data"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "update_id",
-						"type": "String"
 					},
 					{
-						"name": "customer_id",
-						"type": "String"
-					},
-					{
-						"name": "old_loyalty_tier",
-						"type": "String"
-					},
-					{
-						"name": "new_loyalty_tier",
-						"type": "String"
-					},
-					{
-						"name": "change_reason",
-						"type": "String"
-					},
-					{
-						"name": "effective_date",
-						"type": "String"
-					},
-					{
-						"name": "updated_at",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_adls_capstone')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_product_csv')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_adls_capstone",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "product_master_seed.csv",
-						"folderPath": "raw/product",
-						"fileSystem": "retail-data"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "product_id",
-						"type": "String"
-					},
-					{
-						"name": "product_name",
-						"type": "String"
-					},
-					{
-						"name": "category",
-						"type": "String"
-					},
-					{
-						"name": "brand",
-						"type": "String"
-					},
-					{
-						"name": "unit_price",
-						"type": "String"
-					},
-					{
-						"name": "status",
-						"type": "String"
-					},
-					{
-						"name": "last_updated",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_adls_capstone')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_product_sql')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_sql_capstone",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "product_id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "product_name",
+						"name": "account_status",
 						"type": "varchar"
 					},
 					{
-						"name": "category",
-						"type": "varchar"
-					},
-					{
-						"name": "brand",
-						"type": "varchar"
-					},
-					{
-						"name": "unit_price",
+						"name": "available_balance",
 						"type": "float",
 						"precision": 15
 					},
 					{
-						"name": "status",
-						"type": "varchar"
-					},
-					{
 						"name": "last_updated",
 						"type": "date"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "product_master"
+					"table": "account_master"
 				}
 			},
 			"dependsOn": [
@@ -896,7 +714,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_raw_customer')]",
+			"name": "[concat(parameters('factoryName'), '/ds_bank_customer_csv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -909,7 +727,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "customer_master_seed.csv",
+						"fileName": "bank_customer_master_seed.csv",
 						"folderPath": "raw/customer",
 						"fileSystem": "retail-data"
 					},
@@ -944,19 +762,11 @@
 						"type": "String"
 					},
 					{
-						"name": "region",
+						"name": "kyc_status",
 						"type": "String"
 					},
 					{
-						"name": "signup_date",
-						"type": "String"
-					},
-					{
-						"name": "loyalty_tier",
-						"type": "String"
-					},
-					{
-						"name": "status",
+						"name": "risk_category",
 						"type": "String"
 					},
 					{
@@ -970,7 +780,61 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_raw_loyalty')]",
+			"name": "[concat(parameters('factoryName'), '/ds_bank_customer_sql')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_sql_capstone",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "customer_id",
+						"type": "varchar"
+					},
+					{
+						"name": "customer_name",
+						"type": "varchar"
+					},
+					{
+						"name": "email",
+						"type": "varchar"
+					},
+					{
+						"name": "phone",
+						"type": "varchar"
+					},
+					{
+						"name": "city",
+						"type": "varchar"
+					},
+					{
+						"name": "state",
+						"type": "varchar"
+					},
+					{
+						"name": "kyc_status",
+						"type": "varchar"
+					},
+					{
+						"name": "risk_category",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "bank_customer_master"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_sql_capstone')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_blocked_merchants_csv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -983,8 +847,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "loyalty_membership_updates.csv",
-						"folderPath": "raw/loyaltyupdates",
+						"fileName": "blocked_merchants.csv",
+						"folderPath": "raw/blockedmerchants",
 						"fileSystem": "retail-data"
 					},
 					"columnDelimiter": ",",
@@ -994,31 +858,19 @@
 				},
 				"schema": [
 					{
-						"name": "update_id",
+						"name": "merchant_id",
 						"type": "String"
 					},
 					{
-						"name": "customer_id",
+						"name": "merchant_name",
 						"type": "String"
 					},
 					{
-						"name": "old_loyalty_tier",
+						"name": "blocked_reason",
 						"type": "String"
 					},
 					{
-						"name": "new_loyalty_tier",
-						"type": "String"
-					},
-					{
-						"name": "change_reason",
-						"type": "String"
-					},
-					{
-						"name": "effective_date",
-						"type": "String"
-					},
-					{
-						"name": "updated_at",
+						"name": "blocked_since",
 						"type": "String"
 					}
 				]
@@ -1028,7 +880,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_raw_product')]",
+			"name": "[concat(parameters('factoryName'), '/ds_raw_account')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1041,8 +893,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "product_master_seed.csv",
-						"folderPath": "raw/product",
+						"fileName": "account_master_seed.csv",
+						"folderPath": "raw/accountmaster",
 						"fileSystem": "retail-data"
 					},
 					"columnDelimiter": ",",
@@ -1052,27 +904,27 @@
 				},
 				"schema": [
 					{
-						"name": "product_id",
+						"name": "account_id",
 						"type": "String"
 					},
 					{
-						"name": "product_name",
+						"name": "customer_id",
 						"type": "String"
 					},
 					{
-						"name": "category",
+						"name": "account_type",
 						"type": "String"
 					},
 					{
-						"name": "brand",
+						"name": "open_date",
 						"type": "String"
 					},
 					{
-						"name": "unit_price",
+						"name": "account_status",
 						"type": "String"
 					},
 					{
-						"name": "status",
+						"name": "available_balance",
 						"type": "String"
 					},
 					{
@@ -1086,7 +938,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_raw_sales')]",
+			"name": "[concat(parameters('factoryName'), '/ds_raw_bank_customer')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1099,8 +951,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "daily_sales_transactions.csv",
-						"folderPath": "raw/salestransactions",
+						"fileName": "bank_customer_master_seed.csv",
+						"folderPath": "raw/customer",
 						"fileSystem": "retail-data"
 					},
 					"columnDelimiter": ",",
@@ -1110,11 +962,127 @@
 				},
 				"schema": [
 					{
-						"name": "sales_id",
+						"name": "customer_id",
 						"type": "String"
 					},
 					{
-						"name": "transaction_date",
+						"name": "customer_name",
+						"type": "String"
+					},
+					{
+						"name": "email",
+						"type": "String"
+					},
+					{
+						"name": "phone",
+						"type": "String"
+					},
+					{
+						"name": "city",
+						"type": "String"
+					},
+					{
+						"name": "state",
+						"type": "String"
+					},
+					{
+						"name": "kyc_status",
+						"type": "String"
+					},
+					{
+						"name": "risk_category",
+						"type": "String"
+					},
+					{
+						"name": "last_updated",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_adls_capstone')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_raw_blocked_merchants')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_adls_capstone",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "blocked_merchants.csv",
+						"folderPath": "raw/blockedmerchants",
+						"fileSystem": "retail-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "merchant_id",
+						"type": "String"
+					},
+					{
+						"name": "merchant_name",
+						"type": "String"
+					},
+					{
+						"name": "blocked_reason",
+						"type": "String"
+					},
+					{
+						"name": "blocked_since",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_adls_capstone')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_raw_transactions')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_adls_capstone",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "bank_transactions.csv",
+						"folderPath": "raw/banktransactions",
+						"fileSystem": "retail-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "transaction_id",
+						"type": "String"
+					},
+					{
+						"name": "transaction_ts",
+						"type": "String"
+					},
+					{
+						"name": "account_id",
 						"type": "String"
 					},
 					{
@@ -1122,35 +1090,35 @@
 						"type": "String"
 					},
 					{
-						"name": "product_id",
+						"name": "merchant_name",
 						"type": "String"
 					},
 					{
-						"name": "store_id",
+						"name": "transaction_type",
 						"type": "String"
 					},
 					{
-						"name": "quantity",
+						"name": "amount",
 						"type": "String"
 					},
 					{
-						"name": "unit_price",
+						"name": "currency",
 						"type": "String"
 					},
 					{
-						"name": "discount_pct",
+						"name": "country",
 						"type": "String"
 					},
 					{
-						"name": "net_amount",
+						"name": "city",
 						"type": "String"
 					},
 					{
-						"name": "payment_mode",
+						"name": "device_id",
 						"type": "String"
 					},
 					{
-						"name": "sales_channel",
+						"name": "status",
 						"type": "String"
 					},
 					{
@@ -1164,7 +1132,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_sales_csv')]",
+			"name": "[concat(parameters('factoryName'), '/ds_transactions_csv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1177,8 +1145,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "daily_sales_transactions.csv",
-						"folderPath": "raw/salestransactions",
+						"fileName": "bank_transactions.csv",
+						"folderPath": "raw/banktransactions",
 						"fileSystem": "retail-data"
 					},
 					"columnDelimiter": ",",
@@ -1188,11 +1156,15 @@
 				},
 				"schema": [
 					{
-						"name": "sales_id",
+						"name": "transaction_id",
 						"type": "String"
 					},
 					{
-						"name": "transaction_date",
+						"name": "transaction_ts",
+						"type": "String"
+					},
+					{
+						"name": "account_id",
 						"type": "String"
 					},
 					{
@@ -1200,35 +1172,35 @@
 						"type": "String"
 					},
 					{
-						"name": "product_id",
+						"name": "merchant_name",
 						"type": "String"
 					},
 					{
-						"name": "store_id",
+						"name": "transaction_type",
 						"type": "String"
 					},
 					{
-						"name": "quantity",
+						"name": "amount",
 						"type": "String"
 					},
 					{
-						"name": "unit_price",
+						"name": "currency",
 						"type": "String"
 					},
 					{
-						"name": "discount_pct",
+						"name": "country",
 						"type": "String"
 					},
 					{
-						"name": "net_amount",
+						"name": "city",
 						"type": "String"
 					},
 					{
-						"name": "payment_mode",
+						"name": "device_id",
 						"type": "String"
 					},
 					{
-						"name": "sales_channel",
+						"name": "status",
 						"type": "String"
 					},
 					{
