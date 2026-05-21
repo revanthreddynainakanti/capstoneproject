@@ -151,6 +151,144 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "copy_product_data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "product_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "product_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "product_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "product_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "category",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "category",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "brand",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "brand",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "unit_price",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "unit_price",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "status",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "status",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "last_updated",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "last_updated",
+									"type": "Date",
+									"physicalType": "date"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_product_csv",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_product_sql",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
