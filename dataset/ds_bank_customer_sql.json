@@ -1,0 +1,49 @@
+{
+	"name": "ds_bank_customer_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_capstone",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "customer_id",
+				"type": "varchar"
+			},
+			{
+				"name": "customer_name",
+				"type": "varchar"
+			},
+			{
+				"name": "email",
+				"type": "varchar"
+			},
+			{
+				"name": "phone",
+				"type": "varchar"
+			},
+			{
+				"name": "city",
+				"type": "varchar"
+			},
+			{
+				"name": "state",
+				"type": "varchar"
+			},
+			{
+				"name": "kyc_status",
+				"type": "varchar"
+			},
+			{
+				"name": "risk_category",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "bank_customer_master"
+		}
+	}
+}
