@@ -1,0 +1,12 @@
+{
+	"name": "ls_adls_capstone",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://capstoneadls1234.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDk1MkE1NDA3LTY3OUQtNDg5NS05MDAyLTg1MDlFRTU5MkY5OV80NmRiYzAxNy1mOTAxLTRmMmQtYWE4MS1mOWYxMTJjZTlhNzAiDQp9"
+		}
+	}
+}
